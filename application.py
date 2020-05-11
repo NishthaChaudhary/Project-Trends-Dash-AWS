@@ -3,7 +3,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import datetime
+import flask
 from dash.dependencies import Input, Output
+
+server=flask.Flask(__name__)
+application = dash.Dash(__name__, server=server)
 
 global dff
 df=pd.read_csv('data-trending-nishtha-2020.csv', index_col=False, sep='|')
@@ -16,8 +20,6 @@ family=dff['prod_family'].unique()
 #day=[7,14,30, 90, 180, 365]
 day=['7 past days','14 past days','30 past days','90 past days','180 past days','365 past days']
 
-
-application = dash.Dash()
 #external_stylesheets = ['https://github.com/STATWORX/blog/blob/master/DashApp/assets/style.css']
 #td,th {
 #text-align: center;
