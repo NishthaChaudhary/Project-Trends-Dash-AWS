@@ -192,4 +192,4 @@ def generate_table(family,days):
 
 # Run the app
 if __name__ == '__main__':
-    application.run_server()
+    application.run_server(port=8000)
