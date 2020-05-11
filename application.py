@@ -6,8 +6,10 @@ import datetime
 import flask
 from dash.dependencies import Input, Output
 
-server=flask.Flask(__name__)
-application = dash.Dash(__name__, server=server)
+#server=flask.Flask(__name__)
+#application = dash.Dash(__name__, server=server)
+
+application = dash.Dash(__name__)
 
 global dff
 df=pd.read_csv('data-trending-nishtha-2020.csv', index_col=False, sep='|')
