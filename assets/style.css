@@ -160,7 +160,7 @@ html {
   @font-face{
      font-family:Muli; !important
      src: url(font/Muli.ttf)
-     font-size: 62.5%;
+     font-size: 40%;
    }
 }
 body {
@@ -182,14 +182,14 @@ h1 {
   font-size: 4.5rem;
   line-height: 1.2;
   letter-spacing: -.1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 h2 {
   font-size: 3.6rem;
   line-height: 1.25;
   letter-spacing: -.1rem;
-  margin-bottom: 1.8rem;
-  margin-top: 1.8rem;
+  margin-bottom: 1rem;
+  margin-top: 0rem;
 }
 h3 {
   font-size: 3.0rem;
@@ -364,9 +364,9 @@ table {
   border-collapse: collapse;
 }
 th, td {
-  padding: 12px 15px;
+  padding: 10px 12px;
   text-align: left;
-  border-bottom: 1px solid white;
+  border-bottom: 0.5px solid white;
 }
 th:first-child, td:first-child {
   text-align: left;
@@ -387,7 +387,7 @@ pre, dl, figure, table, form {
   margin-bottom: 0rem;
 }
 p, ul, ol {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.50rem;
 }
 /* Utilities –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .u-full-width {
@@ -406,7 +406,7 @@ p, ul, ol {
 }
 /* Misc –––––––––––––––––––––––––––––––––––––––––––––––––– */
 hr {
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-bottom: 3.5rem;
   border-width: 0;
   border-top: 1px solid #E1E1E1;
@@ -462,7 +462,7 @@ h1, h2, h3, h4, h5 {
 p {
   font-family: "Muli";
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   padding-left: 12px;
 }
 a {
@@ -497,7 +497,7 @@ a {
 }
 .div-for-dropdown {
   padding-top: 12px;
-  padding-bottom: 12px;
+  padding-bottom: 9px;
 }
 .div-for-slider {
   width: 97%;
