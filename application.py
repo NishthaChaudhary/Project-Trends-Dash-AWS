@@ -9,7 +9,10 @@ from dash.dependencies import Input, Output
 #server=flask.Flask(__name__)
 #application = dash.Dash(__name__, server=server)
 
-application = dash.Dash(__name__)
+app = dash.Dash(__name__)
+application=app.server
+
+
 
 global dff
 df=pd.read_csv('data-trending-nishtha-2020.csv', index_col=False, sep='|')
@@ -22,6 +25,8 @@ family=dff['prod_family'].unique()
 #day=[7,14,30, 90, 180, 365]
 day=['7 past days','14 past days','30 past days','90 past days','180 past days','365 past days']
 
+
+#application = dash.Dash()
 #external_stylesheets = ['https://github.com/STATWORX/blog/blob/master/DashApp/assets/style.css']
 #td,th {
 #text-align: center;
@@ -38,7 +43,7 @@ colors = {
 }
 
 
-application.layout = html.Div(
+app.layout = html.Div(
     children=[
         html.Div(className='row',
                  children=[
@@ -98,7 +103,7 @@ def parse_contents(contents, filename):
     return df
 
 
-@application.callback(
+@app.callback(
         Output('trend-graph','figure'),
         [Input('product-family','value'),
          Input('duration-time','value')])
@@ -147,7 +152,7 @@ def week_data(family,days):
             }
         })
 
-@application.callback(
+@app.callback(
         Output('html','children'),
         [Input('product-family','value'),
          Input('duration-time','value')])
@@ -194,4 +199,4 @@ def generate_table(family,days):
 
 # Run the app
 if __name__ == '__main__':
-    application.run_server(port=8080)
+    application.run(port=8080)
