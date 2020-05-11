@@ -2,10 +2,10 @@
 
 name: CI-CD-Pipeline-Dev
 env:
-  EB_PACKAGE_S3_BUCKET_NAME : "rfm.flask"
-  EB_APPLICATION_NAME       : "trend-prod"
-  EB_ENVIRONMENT_NAME       : "TrendProd-env"
-  DEPLOY_PACKAGE_NAME       : "trend-app-${{github.sha}}.zip"
+  EB_PACKAGE_S3_BUCKET_NAME : "dash.bucket"
+  EB_APPLICATION_NAME       : "ai-trends"
+  EB_ENVIRONMENT_NAME       : "AiTrends-env"
+  DEPLOY_PACKAGE_NAME       : "trends-app-${{github.sha}}.zip"
   AWS_REGION_NAME           : "us-east-2"     
 
 on:
