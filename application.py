@@ -190,4 +190,4 @@ def generate_table(family,days):
 
 # Run the app
 if __name__ == '__main__':
-    application.run_server(debug=True)
+    application.run_server()
