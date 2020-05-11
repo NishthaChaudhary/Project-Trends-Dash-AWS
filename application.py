@@ -65,14 +65,14 @@ app.layout = html.Div(
                                                       value='ACCESSORIES',
                                                       style={'backgroundColor': 'lightgrey'},
                                                       className='stockselector'
-                                                      )],style={'color': 'white', 'font-family': 'Muli'}),
+                                                      )],style={'color': 'white', 'font-family': 'Muli','font-size':'12px'}),
                     html.Div(
                                 children=[
                                     html.P('Time Duration:'),
                                     dcc.RadioItems(id='duration-time',
                                                    options=[{'label': i, 'value': i} for i in day],
                                                        value='7 past days'
-                                        )],style={'display': 'inline-block', 'font-family':'Muli'}),
+                                        )],style={'display': 'inline-block', 'font-family':'Muli','font-size':'12px'}),
 
                     html.Div(children=[
                                 html.Div(id='html',style={'align':'centre', 'font-family':'Muli'})]
@@ -184,13 +184,13 @@ def generate_table(family,days):
     week_data_top5=week_data.head(5).reset_index(drop=True)
     return html.Table([
        html.Thead(
-            html.Tr([html.Th(col) for col in week_data_top5.columns],style={'textAlign': 'right', 'font-family':'Muli'})
+            html.Tr([html.Th(col) for col in week_data_top5.columns],style={'textAlign': 'right', 'font-family':'Muli','font-size':'12px'})
         ),
         html.Tbody([
             html.Tr([
                 html.Td(week_data_top5.iloc[i][col]) for col in week_data_top5.columns
-            ], style={'textAlign':'right','font-family':'Muli'}) for i in range(min(len(week_data_top5), 5))
-        ],style={'textAlign':'right','font-family':'Muli'})
+            ], style={'textAlign':'right','font-family':'Muli','font-size':'12px'}) for i in range(min(len(week_data_top5), 5))
+        ],style={'textAlign':'right','font-family':'Muli','font-size':'12px'})
    ])
 
 
