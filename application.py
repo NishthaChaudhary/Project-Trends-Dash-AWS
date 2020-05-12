@@ -4,17 +4,15 @@ import dash_html_components as html
 import pandas as pd
 import datetime
 import flask
+from flask import Flask, send_file, render_template, request,make_response
 from dash.dependencies import Input, Output
 
 #server=flask.Flask(__name__)
 #application = dash.Dash(__name__, server=server)
 
-app = dash.Dash(__name__)
-application=app.server
-
-
 
 global dff
+global df
 df=pd.read_csv('data-trending-nishtha-2020.csv', index_col=False, sep='|')
 dff=df.copy()
 dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
@@ -24,6 +22,28 @@ global day
 family=dff['prod_family'].unique()
 #day=[7,14,30, 90, 180, 365]
 day=['7 past days','14 past days','30 past days','90 past days','180 past days','365 past days']
+
+
+application = flask.Flask(__name__)
+app = dash.Dash(__name__,server=application, routes_pathname_prefix='/data-trends/')
+app.config.suppress_callback_exceptions = True
+
+
+@application.route('/',methods=['GET','POST'])
+def index():
+    return render_template('index.html')
+
+@application.route('/data', methods=['GET','POST'])
+def data():
+    if request.method=='POST':
+        f1=request.form['csvfile']
+        df=pd.read_csv(f1,delimiter='|')
+#        global dff
+        dff=df.copy()
+        dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
+#        #global fam
+#        #fam=dff['prod_family'].unique()
+        return flask.redirect(flask.url_for('/data-trends/'))
 
 
 #application = dash.Dash()
@@ -50,12 +70,6 @@ app.layout = html.Div(
                     html.Div(className='four columns div-user-controls',
                              children=[
                                  html.H1('PRODUCT TRENDS'),
-                                html.Div([dcc.Upload(
-                                        id='upload-data',
-                                        children=[html.Button('Upload File')
-                                        ])
-                                ]),
-
 
                                  html.P('Select the Product Family:'),
                     html.Div(
