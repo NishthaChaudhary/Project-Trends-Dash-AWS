@@ -93,7 +93,7 @@ app.layout = html.Div(
                              )]),
                     html.Div(className='eight columns div-for-charts bg-grey',
                              children=[
-                                 dcc.Graph(id='trend-graph', style={'color': '#4CAF50'})
+                                 dcc.Graph(id='trend-graph', style={'color': '#4CAF50', 'margin-top':'5rem'})
                              ])
         ])])
 
