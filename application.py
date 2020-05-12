@@ -95,7 +95,7 @@ app.layout = html.Div(
                              children=[
                                  dcc.Graph(id='trend-graph', style={'color': '#4CAF50', 'margin-top':'5rem'})
                              ])
-        ])])
+        ],style={'font-family':'Muli'})])
 
 def parse_contents(contents, filename):
     content_type, content_string = contents.split(',')
