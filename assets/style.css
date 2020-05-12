@@ -157,6 +157,7 @@ text-align: center;
 
 
 html {
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli:400,700,800,900&subset=latin,latin-ext"> 
   @font-face{
      font-family:Muli; !important
      src: url(font/Muli.ttf)
@@ -439,6 +440,7 @@ hr {
 /* Custom App CSS Below --------------------------------- */
 /* Main Layout ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 html, body{
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli:400,700,800,900&subset=latin,latin-ext"> 
   height: 100%;
 }
 
