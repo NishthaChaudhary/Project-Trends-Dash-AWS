@@ -11,22 +11,7 @@ from dash.dependencies import Input, Output
 #application = dash.Dash(__name__, server=server)
 
 
-global dff
-global df
-df=pd.read_csv('data-trending-nishtha-2020.csv', index_col=False, sep='|')
-dff=df.copy()
-dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
-
-global family
-global day
-family=dff['prod_family'].unique()
-#day=[7,14,30, 90, 180, 365]
-day=['7 past days','14 past days','30 past days','90 past days','180 past days','365 past days']
-
-
 application = flask.Flask(__name__)
-app = dash.Dash(__name__,server=application, routes_pathname_prefix='/data-trends/')
-app.config.suppress_callback_exceptions = True
 
 
 @application.route('/',methods=['GET','POST'])
@@ -38,13 +23,29 @@ def data():
     if request.method=='POST':
         f1=request.form['csvfile']
         df=pd.read_csv(f1,delimiter='|')
+        #df['transaction_date']=pd.to_datetime(df['transaction_date'],format= '%m/%d/%Y')
+        df.to_csv(r'static\file.csv',index = False, header=True)
 #        global dff
-        dff=df.copy()
-        dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
+        #dff=df.copy()
+        #dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
 #        #global fam
 #        #fam=dff['prod_family'].unique()
         return flask.redirect(flask.url_for('/data-trends/'))
+    
 
+app = dash.Dash(__name__,server=application, routes_pathname_prefix='/data-trends/')
+app.config.suppress_callback_exceptions = True
+    
+    
+global df_fixed
+df_fixed=pd.read_csv('data-trending-nishtha-2020.csv', index_col=False, sep='|')
+df_fixed['transaction_date']=pd.to_datetime(df_fixed['transaction_date'],format= '%m/%d/%Y')
+
+global family
+global day
+family=df_fixed['prod_family'].unique()
+#day=[7,14,30, 90, 180, 365]
+day=['7 past days','14 past days','30 past days','90 past days','180 past days','365 past days']
 
 #application = dash.Dash()
 #external_stylesheets = ['https://github.com/STATWORX/blog/blob/master/DashApp/assets/style.css']
@@ -97,24 +98,6 @@ app.layout = html.Div(
                              ])
         ],style={'font-family':'Muli'})])
 
-def parse_contents(contents, filename):
-    content_type, content_string = contents.split(',')
-
-    decoded = base64.b64decode(content_string)
-    try:
-        if 'csv' in filename:
-            # Assume that the user uploaded a CSV file
-            df = pd.read_csv(
-                io.StringIO(decoded.decode('utf-8')))
-        elif 'xls' in filename:
-            # Assume that the user uploaded an excel file
-            df = pd.read_excel(io.BytesIO(decoded))
-
-    except Exception as e:
-        print(e)
-        return None
-
-    return df
 
 
 @app.callback(
@@ -123,6 +106,8 @@ def parse_contents(contents, filename):
          Input('duration-time','value')])
 
 def week_data(family,days):
+    dff=pd.read_csv(r'static\file.csv', index_col=False)
+    dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
     dff_family=dff.loc[dff.prod_family==family]
     last=dff_family['transaction_date'].max()
     dd=days
@@ -171,6 +156,8 @@ def week_data(family,days):
         [Input('product-family','value'),
          Input('duration-time','value')])
 def generate_table(family,days):
+    dff=pd.read_csv(r'static\file.csv', index_col=False)
+    dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
     dff_family=dff.loc[dff.prod_family==family]
     last=dff_family['transaction_date'].max()
     dd=days
