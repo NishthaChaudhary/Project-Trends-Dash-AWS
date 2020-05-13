@@ -18,13 +18,23 @@ application = flask.Flask(__name__)
 def index():
     return render_template('index.html')
 
-@application.route('/data', methods=['GET','POST'])
-def data():
+@application.route('/upload', methods=['GET','POST'])
+def upload():
     if request.method=='POST':
         f1=request.form['csvfile']
         df=pd.read_csv(f1,delimiter='|')
         #df['transaction_date']=pd.to_datetime(df['transaction_date'],format= '%m/%d/%Y')
         df.to_csv(r'static\file.csv',index = False, header=True)
+#        global dff
+        #dff=df.copy()
+        #dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
+#        #global fam
+#        #fam=dff['prod_family'].unique()
+        return df
+		
+@application.route('/data', methods=['GET','POST'])		
+def data():
+    if request.method=='POST':
 #        global dff
         #dff=df.copy()
         #dff['transaction_date']=pd.to_datetime(dff['transaction_date'],format= '%m/%d/%Y')
